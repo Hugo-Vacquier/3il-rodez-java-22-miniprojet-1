@@ -46,7 +46,7 @@ public abstract class GenerateurCarte {
      * @param hauteur  La hauteur totale de la carte.
      * @return Le terrain généré pour la position spécifiée.
      */
-    protected abstract Terrain genererTerrain(int i, int j, int largeur, int hauteur);
+    public abstract Terrain genererTerrain(int x, int y, int largeur, int hauteur);
 
     /**
      * Obtient la graine utilisée pour la génération de la carte.
