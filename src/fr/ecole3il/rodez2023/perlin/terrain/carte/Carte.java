@@ -3,6 +3,7 @@ package fr.ecole3il.rodez2023.perlin.terrain.carte;
 import fr.ecole3il.rodez2023.perlin.exception.TerrainInexistant;
 import fr.ecole3il.rodez2023.perlin.terrain.elements.Terrain;
 import fr.ecole3il.rodez2023.perlin.terrain.generation.GenerateurCarte;
+import fr.ecole3il.rodez2023.perlin.terrain.visualisation.DetermineurTerrain;
 
 import java.util.Scanner;
 
@@ -11,14 +12,17 @@ public class Carte {
     private int largeur;
     private int hauteur;
     private Terrain[][] terrains;
+    private DetermineurTerrain determineurTerrain;
 
     // Le premier constructeur reste inchangé
 
     // Second constructeur qui lit les données depuis une chaîne de caractères
-    public Carte(String donneesCarte) {
+    public Carte(String donneesCarte, DetermineurTerrain determineurTerrain) {
         try (Scanner scanner = new Scanner(donneesCarte)) {
             // Lecture du nom de la carte
             this.nom = scanner.nextLine();
+
+            this.determineurTerrain = determineurTerrain;
 
             // Lecture de la largeur et de la hauteur de la carte
             this.largeur = scanner.nextInt();
@@ -58,6 +62,10 @@ public class Carte {
 
     public int getHauteur() {
         return hauteur;
+    }
+
+    public DetermineurTerrain getDetermineurTerrain() {
+        return determineurTerrain;
     }
 
     public Terrain getTerrain(int x, int y) {

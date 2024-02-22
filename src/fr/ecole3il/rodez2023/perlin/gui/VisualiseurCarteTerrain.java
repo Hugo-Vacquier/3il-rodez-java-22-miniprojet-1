@@ -1,10 +1,13 @@
 package fr.ecole3il.rodez2023.perlin.gui;
 
+import fr.ecole3il.rodez2023.perlin.terrain.carte.Carte;
 import fr.ecole3il.rodez2023.perlin.terrain.carte.ManipulateurCarte;
 import fr.ecole3il.rodez2023.perlin.terrain.concrets.VisualiseurTerrainEnonce;
 import fr.ecole3il.rodez2023.perlin.terrain.elements.TypeTerrain;
+import fr.ecole3il.rodez2023.perlin.terrain.elements.Terrain;
 import fr.ecole3il.rodez2023.perlin.terrain.generation.GenerateurAleatoire;
 import fr.ecole3il.rodez2023.perlin.terrain.generation.GenerateurPerlin;
+import fr.ecole3il.rodez2023.perlin.terrain.visualisation.DetermineurTerrain;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,11 +25,12 @@ import java.io.File;
  * qui permet de charger, enregistrer et générer des cartes, ainsi que d'afficher leur représentation graphique.
  */
 public class VisualiseurCarteTerrain extends JFrame {
+	private DetermineurTerrain determineurTerrain;
+	private Carte carte;
+	private JPanel cartePanel;
+	private JLabel terrainLabel;
 
     private static final long serialVersionUID = -4664266628089280746L;
-    private final JPanel cartePanel;
-    private Carte carte;
-    private JLabel terrainLabel;
     private VisualiseurTerrainEnonce vte;
 
     /**
@@ -36,22 +40,24 @@ public class VisualiseurCarteTerrain extends JFrame {
      * @param panelWidth La largeur du panneau.
      * @param panelHeight La hauteur du panneau.
      */
-    public void drawCarte(Carte carte, Graphics g, int panelWidth, int panelHeight) {
-        vte = new VisualiseurTerrainEnonce(carte);
-        int largeur = carte.getLargeur();
-        int hauteur = carte.getHauteur();
-        int tuileWidth = panelWidth / largeur;
-        int tuileHeight = panelHeight / hauteur;
+	public void drawCarte(Carte carte, Graphics g, int panelWidth, int panelHeight) {
+		DetermineurTerrain dt = carte.getDetermineurTerrain(); // Récupérez-le depuis la Carte
+		int largeur = carte.getLargeur();
+		int hauteur = carte.getHauteur();
+		int tuileWidth = panelWidth / largeur;
+		int tuileHeight = panelHeight / hauteur;
 
-        for (int y = 0; y < hauteur; y++) {
-            for (int x = 0; x < largeur; x++) {
-                TypeTerrain type = vte.getTypeTerrain(x, y);
-                BufferedImage image = type.getImage();
-                g.drawImage(image, x * tuileWidth, y * tuileHeight, tuileWidth, tuileHeight, null);
-            }
-        }
-    }
-	public VisualiseurCarteTerrain() {
+		for (int y = 0; y < hauteur; y++) {
+			for (int x = 0; x < largeur; x++) {
+				Terrain terrain = carte.getTerrain(x, y);
+				TypeTerrain type = terrain.getTypeTerrain(dt); // Utilisez le DetermineurTerrain ici
+				BufferedImage image = type.getImage(); // Assurez-vous que cette méthode existe et retourne l'image correcte
+				g.drawImage(image, x * tuileWidth, y * tuileHeight, tuileWidth, tuileHeight, null);
+			}
+		}
+	}
+	public VisualiseurCarteTerrain(DetermineurTerrain dt) {
+		this.determineurTerrain = dt;
 		VisualiseurCarteTerrain monObjet = this;
 		setTitle("Visualiseur de Carte");
 		setSize(800, 600);
@@ -211,6 +217,8 @@ public class VisualiseurCarteTerrain extends JFrame {
 			repaint();
 		}
 	}
+
+
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
