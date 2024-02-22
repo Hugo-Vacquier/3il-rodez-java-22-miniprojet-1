@@ -47,26 +47,32 @@ public class Utils {
      * 
      * @author philibert roquart, fainéant
      */
-    public static int[] melanger(int[] tab, long seed) {
-        // Mélanger le tableau de permutation en utilisant 
-    	// ...
-    	// Bon, je le ferai plus tard, je vais réviser l'espagnol
-    	// Je mets ça, ça marchera bien en attendant
-    	// tant pis
-        return tab;
+    /**
+     * Mélange le tableau donné de manière déterministe en utilisant la graine spécifiée.
+     *
+     * @param array Le tableau à mélanger.
+     * @param seed La graine à utiliser pour le mélange.
+     */
+    public static void melanger(int[] array, long seed) {
+        Random rnd = new Random(seed);
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            // Simple échange d'éléments
+            int a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
     }
 
     /**
-     * Retourne le plus petit des deux nombres fournis.
-     * @param width Le premier nombre.
-     * @param height Le deuxième nombre.
-     * @return Le plus petit des deux nombres.
-     * 
-     * @author philibert roquart, fainéant
+     * Retourne la plus petite des deux valeurs passées en paramètres.
+     *
+     * @param width La première valeur à comparer.
+     * @param height La seconde valeur à comparer.
+     * @return La valeur minimale entre 'width' et 'height'.
      */
     public static double min(int width, int height) {
-    	// pas le temps, j'ai mes exos de chimie à finir
-    	return 1;
+        return Math.min(width, height);
     }
 
     /**

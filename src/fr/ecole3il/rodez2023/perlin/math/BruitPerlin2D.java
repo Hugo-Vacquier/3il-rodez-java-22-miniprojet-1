@@ -1,5 +1,6 @@
 package fr.ecole3il.rodez2023.perlin.math;
 
+import fr.ecole3il.rodez2023.perlin.Utils;
 /**
  * La classe BruitPerlin2D étend Bruit2D pour implémenter l'algorithme de bruit de Perlin en deux dimensions.
  * Elle utilise une table de permutation et des vecteurs de gradient pour générer des valeurs cohérentes et continues de bruit.
@@ -16,7 +17,7 @@ public class BruitPerlin2D extends Bruit2D {
 	static {
 		// Initialisation de la table de permutation avec des valeurs de 0 à 255
 		PERMUTATION = new int[256];
-		for (int i = 0; i < 256; i++) {
+		for (int i = 0; i < PERMUTATION.length; i++) {
 			PERMUTATION[i] = i;
 		}
 		// Mélange de la table de permutation en utilisant la graine
@@ -31,8 +32,8 @@ public class BruitPerlin2D extends Bruit2D {
 	 */
 	public BruitPerlin2D(long graine, double resolution) {
 		super(graine, resolution);
-		// Mélange de la table de permutation basée sur la graine
-		// (Vous pouvez réutiliser le même générateur de nombres aléatoires que celui utilisé pour le mélange)
+		// Ici, on utilise la graine pour mélanger la table de permutation
+		Utils.melanger(PERMUTATION, graine);
 	}
 
 	@Override
