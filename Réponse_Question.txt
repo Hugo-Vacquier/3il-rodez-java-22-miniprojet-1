@@ -1,0 +1,13 @@
+Question : pourquoi l'attribut graine est-il en final ?
+Cet attribut est final pour évité que sa valeur ne change une fois qu'elle est instancié, si elle change elle risque d'entreiné des erreur dans la génération du bruit de perlin car les valeurs dépende de la graine
+
+Question : Expliquer, en s'appuyant sur un exercice vu en cours, pourquoi c'est une mauvaise idée. Quelle est la solution qu'il faudrait préférer (et que l'on va préférer) ?
+En faisant référence à l'exercice des pokémon vu en cour, faire une classe pour chaque type de terrain risque de complexifié le code avec de la dupplication de code pour chaque terrain, des modifications à apporté à chaque classe séparément, devoir créer une nouvelle classe si on souaite un nouveau terrain.
+Un patron de conception comme celui de stratégie serait une meilleur idée avec une classe de base terrain.
+
+Question : quel type utilisez-vous ?
+Un double
+
+Question : pourquoi sortir, selon vous, ce bout d'algorithme de la classe ?
+Afin de rendre le code plus facilement modulable pour isolé des futurs changements dans le code et évité les risques d'erreur liés à l'encapsulement des différentes parties de notre projet.
+
