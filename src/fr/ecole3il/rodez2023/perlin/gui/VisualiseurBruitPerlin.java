@@ -102,21 +102,39 @@ public class VisualiseurBruitPerlin extends JFrame {
         String seedText = seedField.getText();
         long seed = seedText.isEmpty() ? System.currentTimeMillis() : Long.parseLong(seedText);
 
-        double resolution = DEFAULT_RESOLUTION;
+        double resolution;
         try {
-            resolution = Float.parseFloat(resolutionField.getText());
+            resolution = Double.parseDouble(resolutionField.getText());
         } catch (NumberFormatException e) {
-            // Utilise la résolution par défaut si la valeur entrée n'est pas valide
+            resolution = DEFAULT_RESOLUTION; // Utilise la résolution par défaut si la valeur entrée n'est pas valide
         }
-        
-        
-        ////////// CODE À MODIFIER 
-        noiseImage = new truc;
-        
-        ////////// FIN CODE À MODIFIER
-        tickImageButton.setEnabled(true); // Désactiver le bouton initialement
-        tickImage();
+
+        // Création de l'instance de BruitPerlin2D avec la graine et la résolution
+        BruitPerlin2D perlinNoise = new BruitPerlin2D(seed, resolution);
+
+        // Création de l'image
+        BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+        for (int y = 0; y < HEIGHT; y++) {
+            for (int x = 0; x < WIDTH; x++) {
+                // Normaliser les coordonnées pour le bruit de Perlin
+                double nx = x / (double)WIDTH, ny = y / (double)HEIGHT;
+
+                // Obtenir la valeur de bruit en ce point (ajuster selon votre besoin)
+                double noiseValue = perlinNoise.bruit2D(nx * resolution, ny * resolution);
+
+                // Convertir la valeur de bruit en une couleur (ici en niveaux de gris)
+                int colorValue = (int)((noiseValue + 1) * 127.5); // Normaliser et convertir
+                int rgb = (colorValue << 16) | (colorValue << 8) | colorValue;
+
+                image.setRGB(x, y, rgb);
+            }
+        }
+
+        ImageIcon imageIcon = new ImageIcon(image);
+        imageLabel.setIcon(imageIcon);
+        tickImageButton.setEnabled(true); // Activer le bouton après la génération
     }
+
 
     /**
      * Méthode principale pour lancer l'application.
