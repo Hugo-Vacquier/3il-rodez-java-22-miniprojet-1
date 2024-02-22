@@ -110,7 +110,7 @@ public class VisualiseurBruitPerlin extends JFrame {
         }
 
         // Création de l'instance de BruitPerlin2D avec la graine et la résolution
-        BruitPerlin2D perlinNoise = new BruitPerlin2D(seed, resolution);
+        BruitPerlin2D perlinNoise = new BruitPerlin2D(seed);
 
         // Création de l'image
         BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
