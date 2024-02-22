@@ -48,7 +48,7 @@ public abstract class Bruit2D {
      * @return La résolution actuelle.
      */
     public double getResolution() {
-        return resolution;
+        return this.resolution;
     }
 
     /**
