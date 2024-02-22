@@ -1,32 +1,19 @@
 package fr.ecole3il.rodez2023.perlin.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Graphics;
+import fr.ecole3il.rodez2023.perlin.terrain.carte.ManipulateurCarte;
+import fr.ecole3il.rodez2023.perlin.terrain.concrets.VisualiseurTerrainEnonce;
+import fr.ecole3il.rodez2023.perlin.terrain.elements.TypeTerrain;
+import fr.ecole3il.rodez2023.perlin.terrain.generation.GenerateurAleatoire;
+import fr.ecole3il.rodez2023.perlin.terrain.generation.GenerateurPerlin;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
-import fr.ecole3il.rodez2023.perlin.terrain.carte.Carte;
-import fr.ecole3il.rodez2023.perlin.terrain.carte.ManipulateurCarte;
-import fr.ecole3il.rodez2023.perlin.terrain.concrets.VisualiseurTerrainEnonce;
-import fr.ecole3il.rodez2023.perlin.terrain.elements.TypeTerrain;
-import fr.ecole3il.rodez2023.perlin.terrain.generation.GenerateurAleatoire;
-import fr.ecole3il.rodez2023.perlin.terrain.generation.GenerateurPerlin;
 
 /**
  * 

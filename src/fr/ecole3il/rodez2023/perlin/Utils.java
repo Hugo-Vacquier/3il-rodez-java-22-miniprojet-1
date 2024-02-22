@@ -27,15 +27,11 @@ public class Utils {
      */
     public static BufferedImage chargerTuile(String nomFichier) {
         try {
-            String imagePath = REPERTOIRE_TUILES + nomFichier;
-            BufferedImage image = ImageIO.read(new File(imagePath));
-            return image;
+            return ImageIO.read(new File("data/" + nomFichier));
         } catch (IOException e) {
             e.printStackTrace();
-            System.exit(1);
+            return null;
         }
-        // Ce code ne sera en pratique jamais exécuté.
-        return null;
     }
 
     /**
