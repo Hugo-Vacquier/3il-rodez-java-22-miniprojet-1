@@ -29,7 +29,7 @@ public class BruitPerlin2D extends Bruit2D {
 	 *
 	 * @param graine La graine utilisée pour initialiser le générateur de nombres aléatoires.
 	 */
-	public BruitPerlin2D(long graine, double resolution) {
+	public BruitPerlin2D(long graine) {
 		super(graine, resolution);
 		// Ici, on utilise la graine pour mélanger la table de permutation
 		Utils.melanger(PERMUTATION, graine);

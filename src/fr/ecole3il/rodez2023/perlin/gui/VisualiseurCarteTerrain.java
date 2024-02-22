@@ -86,11 +86,13 @@ public class VisualiseurCarteTerrain extends JFrame {
 
 		        System.out.println("Coordonnées de la souris - X: " + x + ", Y: " + y);
 
-		        if (x >= 0 && x < carte.getLargeur() && y >= 0 && y < carte.getHauteur()) {
-		            TypeTerrain type = vte.getTypeTerrain(x, y);
-		            terrainLabel.setText("Terrain: " + type.toString());
-		        }
-		    }
+				if (x >= 0 && x < carte.getLargeur() && y >= 0 && y < carte.getHauteur()) {
+					Terrain terrain = carte.getTerrain(x, y); // Obtenez l'objet Terrain pour la position (x, y)
+					TypeTerrain type = determineurTerrain.determinerTerrain(terrain.getAltitude(), terrain.getHydrometrie(), terrain.getTemperature()); // Utilisez DetermineurTerrain pour obtenir le TypeTerrain
+					terrainLabel.setText("Terrain: " + type.toString()); // Mettez à jour le label avec le nom du TypeTerrain
+				}
+
+			}
 
 		    @Override
 		    public void mouseExited(MouseEvent e) {
@@ -107,15 +109,17 @@ public class VisualiseurCarteTerrain extends JFrame {
 		        int x = e.getX() / tuileWidth;
 		        int y = e.getY() / tuileHeight;
 
-		        if (x >= 0 && x < carte.getLargeur() && y >= 0 && y < carte.getHauteur()) {
+				if (x >= 0 && x < carte.getLargeur() && y >= 0 && y < carte.getHauteur()) {
+					Terrain terrain = carte.getTerrain(x, y); // Récupérer le Terrain à la position (x, y)
+					// Formater le contenu avec les informations du Terrain
+					String contenu = "Altitude: " + terrain.getAltitude() +
+							"\nHydrométrie: " + terrain.getHydrometrie() +
+							"\nTempérature: " + terrain.getTemperature();
+					// Afficher la fenêtre modale
+					JOptionPane.showMessageDialog(cartePanel, contenu, "Informations de la tuile", JOptionPane.INFORMATION_MESSAGE);
+				}
 
-		            // Crée le contenu à afficher dans la fenêtre modale
-		            String contenu = "Altitude: " + vte.getAltitudeAffichee(x, y) + "\nHydrométrie: " + vte.getHydrometrieAffichee(x, y)+ "\nTempérature: " + vte.getTemperatureAffichee(x, y);
-
-		            // Affiche une fenêtre modale avec les informations de la tuile
-		            JOptionPane.showMessageDialog(cartePanel, contenu, "Informations de la tuile", JOptionPane.INFORMATION_MESSAGE);
-		        }
-		    }
+			}
 		});
 		add(cartePanel, BorderLayout.CENTER);
 

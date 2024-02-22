@@ -22,7 +22,7 @@ public class DetermineurTerrainEnonce implements DetermineurTerrain {
 				if (temperature <= 0.25) {
 					return TypeTerrain.PLAINE;
 				} else if (temperature <= 0.7) {
-					return TypeTerrain.FORET_CONIFÈRES;
+					return TypeTerrain.FORET_CONIFERES;
 				} else {
 					return TypeTerrain.MONTAGNE;
 				}
@@ -40,7 +40,7 @@ public class DetermineurTerrainEnonce implements DetermineurTerrain {
 				if (temperature <= 0.25) {
 					return TypeTerrain.MARAIS;
 				} else if (temperature <= 0.7) {
-					return TypeTerrain.FORET_CONIFÈRES;
+					return TypeTerrain.FORET_CONIFERES;
 				} else {
 					return TypeTerrain.MONTAGNE;
 				}
